@@ -29,22 +29,22 @@ variable "sg_out_cidr" {
 variable "names" {
 
   default = {
-    vpc              = "jp_vpc",
-    public_subnet    = "jp_vpc_bublic_sn",
-    public_subnet_2  = "jp_vpc_bublic_sn2",
-    private_subnet   = "jp_vpc_private_sn",
-    internet_gateway = "jp_internet_gw",
-    route_table      = "jp_igw_rt",
-    nat_gateway      = "jp_nat_gw",
-    load-balancer    = "jp-lb",
-    lb_target_group  = "jp_lb_tg",
-    target_group_web = "jp_lb_listener_tg_web",
-    target_group_ssh = "jp_lb_listener_tg_ssh",
-    web-tg           = "jp-web-target-group",
-    ssh_tg           = "jp_ssh_target_group",
-    lb_sg            = "jp_load_balancer_sg",
-    instance_sg      = "jp_instance_sg",
-    lb               = "jp_lb",
+    vpc              = format("%s_%s", "jp", "vpc"),
+    public_subnet    = format("%s_%s", "jp", "vpc_bublic_sn"),
+    public_subnet_2  = format("%s_%s", "jp", "vpc_bublic_sn2"),
+    private_subnet   = format("%s_%s", "jp", "vpc_private_sn"),
+    internet_gateway = format("%s_%s", "jp", "internet_gw"),
+    route_table      = format("%s_%s", "jp", "igw_rt"),
+    nat_gateway      = format("%s_%s", "jp", "nat_gw"),
+    load-balancer    = format("%s_%s", "jp", "lb"),
+    lb_target_group  = format("%s_%s", "jp", "lb_tg"),
+    target_group_web = format("%s_%s", "jp", "lb_listener_tg_web"),
+    target_group_ssh = format("%s_%s", "jp", "lb_listener_tg_ssh"),
+    web-tg           = format("%s_%s", "jp", "web-target-group"),
+    ssh_tg           = format("%s_%s", "jp", "ssh_target_group"),
+    lb_sg            = format("%s_%s", "jp", "load_balancer_sg"),
+    instance_sg      = format("%s_%s", "jp", "instance_sg"),
+    lb               = format("%s_%s", "jp", "lb")
   }
 
   sensitive   = true

@@ -1,14 +1,15 @@
-#vpc resoure
-module "vpc" {
-  source = "./modules/vpc/vpc.tf"
-  instance = instance.eip_instance_id
 
+provider "aws" {
+  region = "us-east-1"
 }
 
+module "vpc" {
+  source   = "./modules/vpc"
+  eip_instance_id = module.ec2.eip_instance_id
+}
 
-#instance resource
-module "instance" {
-    source = "./modules/ec2/ec2.tf"
-    subnet_id = vpc.private_subnet
-    security_grups = vpc.instance_sg
+module "ec2" {
+  source          = "./modules/ec2"
+  subnet_id       = module.vpc.pr_sn
+  security_groups = [module.vpc.instance_sg]
 }
