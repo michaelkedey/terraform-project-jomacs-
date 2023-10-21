@@ -10,7 +10,7 @@ resource "aws_ssm_parameter" "pb_sn_1" {
   type  = "String"
   value = aws_subnet.project_public_subnet.id
 }
-            
+
 resource "aws_ssm_parameter" "pb_sn_2" {
   name  = format("/%s/%s/%s", "jomacs", "terraform-p", "pb_sn_2")
   type  = "String"
@@ -23,8 +23,8 @@ resource "aws_ssm_parameter" "pv_sn" {
   value = aws_subnet.project_private_subnet.id
 }
 
-resource "aws_ssm_parameter" "instance_sg"{
-    name  = format("/%s/%s/%s", "jomacs", "terraform-p", "instance_sg")
-    type  = "String"
-    value = aws_security_group.project_instance_sg.id
+resource "aws_ssm_parameter" "instance_sg" {
+  name  = format("/%s/%s/%s", "jomacs", "terraform-p", "instance_sg")
+  type  = "String"
+  value = aws_security_group.project_instance_sg.id
 }

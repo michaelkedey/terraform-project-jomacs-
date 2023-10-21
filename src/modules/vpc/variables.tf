@@ -29,25 +29,27 @@ variable "sg_out_cidr" {
 variable "names" {
 
   default = {
-    vpc              = format("%s_%s", "jp", "vpc"),
-    public_subnet    = format("%s_%s", "jp", "vpc_bublic_sn"),
-    public_subnet_2  = format("%s_%s", "jp", "vpc_bublic_sn2"),
-    private_subnet   = format("%s_%s", "jp", "vpc_private_sn"),
-    internet_gateway = format("%s_%s", "jp", "internet_gw"),
-    route_table      = format("%s_%s", "jp", "igw_rt"),
-    nat_gateway      = format("%s_%s", "jp", "nat_gw"),
-    load-balancer    = format("%s_%s", "jp", "lb"),
-    lb_target_group  = format("%s_%s", "jp", "lb_tg"),
-    target_group_web = format("%s_%s", "jp", "lb_listener_tg_web"),
-    target_group_ssh = format("%s_%s", "jp", "lb_listener_tg_ssh"),
-    web-tg           = format("%s_%s", "jp", "web-target-group"),
-    ssh_tg           = format("%s_%s", "jp", "ssh_target_group"),
-    lb_sg            = format("%s_%s", "jp", "load_balancer_sg"),
-    instance_sg      = format("%s_%s", "jp", "instance_sg"),
-    lb               = format("%s_%s", "jp", "lb")
+    vpc           = "jp_vpc",
+    public_subnet = "jp_vpc_bublic_sn",
+
+    public_subnet_2     = "jp_vpc_bublic_sn2",
+    private_subnet      = "jp_vpc_private_sn",
+    internet_gateway    = "jp_internet_gw",
+    public_route_table  = "jp_public_rt",
+    private_route_table = "jp_private_rt"
+    internet_gateway    = "jp_igw",
+    nat_gateway         = "jp-nat_gw",
+    load-balancer       = "jp-load-balancer",
+    lb_target_group     = "jp_lb_tg",
+    target_group_web    = "jp_lb_listener_tg_web",
+    target_group_ssh    = "jp_lb_listener_tg_ssh",
+    web-tg              = "jp-web-target-group",
+    lb_sg               = "jp_load_balancer_sg",
+    instance_sg         = "jp_instance_sg",
+    lb                  = "jp_lb"
   }
 
-  sensitive   = true
+  #sensitive   = true
   type        = map(string)
   description = "tags for vpc resources"
 }
@@ -63,15 +65,15 @@ variable "project_environment" {
   sensitive = true
 }
 
-variable "eip_instance_id" {
-
-}
-
 variable "eip_domain" {
   default   = "vpc"
   type      = string
   sensitive = true
 }
+
+/* variable "instance_id" {
+  
+} */
 
 variable "load_balancer_type" {
   default = "application"
@@ -81,7 +83,7 @@ variable "load_balancer_type" {
 variable "ports" {
   default = {
     lb_listener = 80,
-    custom_ssh  = 770,
+    custom_ssh  = 273,
     all         = 0
   }
   sensitive = true
@@ -104,6 +106,13 @@ variable "sg_in_protocol" {
   default     = ["tcp"]
   description = "allow only tcp traffic in"
   type        = list(string)
+  sensitive   = true
+}
+
+variable "custom_ssh" {
+  default     = 273
+  description = "allow traffic on this port"
+  type        = number
   sensitive   = true
 }
 

@@ -1,11 +1,9 @@
-
 provider "aws" {
   region = "us-east-1"
 }
 
 module "vpc" {
-  source   = "./modules/vpc"
-  eip_instance_id = module.ec2.eip_instance_id
+  source = "./modules/vpc"
 }
 
 module "ec2" {
