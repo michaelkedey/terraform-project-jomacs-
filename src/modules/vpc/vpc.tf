@@ -51,35 +51,16 @@ resource "aws_subnet" "project_private_subnet" {
 
 }
 
-#internet gateway
-resource "aws_internet_gateway" "project_internet_gateway" {
-  vpc_id = aws_vpc.project_vpc.id
-
-  tags = {
-    Name        = var.names["internet_gateway"]
-    Environment = var.project_environment
-  }
+#eip needed to work with the nat gateway
+resource "aws_eip" "project_eip" {
+  #instance = var.instance_id
 }
 
-#route table
-resource "aws_route_table" "project_route_table" {
-  vpc_id = aws_vpc.project_vpc.id
-  route {
-    cidr_block = var.cidrs["route_table"]
-    gateway_id = aws_internet_gateway.project_internet_gateway.id
-  }
+/* resource "aws_eip_association" "project_eip_association" {
+  instance_id   = var.instance_id
+  allocation_id = aws_eip.project_eip
+} */
 
-  tags = {
-    Name        = var.names["route_table"]
-    Environment = var.project_environment
-  }
-}
-
-#associate rt with public subnet
-resource "aws_route_table_association" "project_route_table_association" {
-  subnet_id      = aws_subnet.project_public_subnet.id
-  route_table_id = aws_route_table.project_route_table.id
-}
 
 #nat gateway
 resource "aws_nat_gateway" "project_nat_gateway" {
@@ -94,20 +75,65 @@ resource "aws_nat_gateway" "project_nat_gateway" {
   depends_on = [aws_internet_gateway.project_internet_gateway]
 }
 
-#elastic ip address
-resource "aws_eip" "project_eip" {
-  instance = var.eip_instance_id
-  domain   = var.eip_domain
+#internet gateway
+resource "aws_internet_gateway" "project_internet_gateway" {
+  vpc_id = aws_vpc.project_vpc.id
+
+
+  tags = {
+    Name        = var.names["internet_gateway"]
+    Environment = var.project_environment
+  }
+}
+
+#public route table
+resource "aws_route_table" "project_public_route_table" {
+  vpc_id = aws_vpc.project_vpc.id
+  route {
+    cidr_block = var.cidrs["route_table"]
+    gateway_id = aws_internet_gateway.project_internet_gateway.id
+  }
+
+  tags = {
+    Name        = var.names["public_route_table"]
+    Environment = var.project_environment
+  }
+}
+
+#associate rt with public subnet
+resource "aws_route_table_association" "project_route_table_association" {
+  subnet_id      = aws_subnet.project_public_subnet.id
+  route_table_id = aws_route_table.project_public_route_table.id
+}
+
+#private route table
+resource "aws_route_table" "project_private_route_table" {
+  vpc_id = aws_vpc.project_vpc.id
+
+  route {
+    cidr_block = var.cidrs["route_table"]
+    gateway_id = aws_nat_gateway.project_nat_gateway.id
+  }
+  tags = {
+    Name        = var.names["private_route_table"]
+    Environment = var.project_environment
+  }
+}
+
+#associate rt with private subnet
+resource "aws_route_table_association" "public_association" {
+  subnet_id      = aws_subnet.project_private_subnet.id
+  route_table_id = aws_route_table.project_private_route_table.id
 }
 
 #load balancer
 resource "aws_lb" "project_lb" {
-  name                       = var.names["load-balancer"]
-  internal                   = false
-  load_balancer_type         = var.load_balancer_type
-  security_groups            = [aws_security_group.project_lb_sg.id]
-  subnets                    = [aws_subnet.project_public_subnet.id, aws_subnet.project_public_subnet_2.id]
-  enable_deletion_protection = true
+  name               = var.names["load-balancer"]
+  internal           = false
+  load_balancer_type = var.load_balancer_type
+  security_groups    = [aws_security_group.project_lb_sg.id]
+  subnets            = [aws_subnet.project_public_subnet.id, aws_subnet.project_public_subnet_2.id]
+  #enable_deletion_protection = true
 
   tags = {
     Name        = var.names["lb"]

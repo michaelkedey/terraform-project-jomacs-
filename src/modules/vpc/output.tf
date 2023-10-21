@@ -1,9 +1,13 @@
-output "subents" {
-  value = {
-    pub_sn1 = aws_subnet.project_public_subnet.id, 
-    pub_sn2 = aws_subnet.project_public_subnet_2.id, 
-    prv_sn = aws_subnet.project_private_subnet.id
-  }
+output "pb_sn1" {
+  value = aws_subnet.project_public_subnet.id
+}
+
+output "pb_sn2" {
+  value = aws_subnet.project_public_subnet_2.id
+}
+
+output "pr_sn" {
+  value = aws_subnet.project_private_subnet.id
 }
 
 output "vpc" {
