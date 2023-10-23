@@ -2,7 +2,6 @@
 ### Author: michael_kedey
 ### Date: 19/10/2023
 ### Last_modified: 23/10/2023
-![GitHub Logo](https://github.com/logo.png)
 **Github: https://github.com/michaelkedey**
 **Linkedin: https://www.linkedin.com/in/michaelkedey**
 
