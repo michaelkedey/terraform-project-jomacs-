@@ -14,6 +14,12 @@ variable "cidrs" {
   description = "cidr blocks for vpc components"
 }
 
+variable "lb_out_cidr" {
+  default   = ["177.70.0.64/26"]
+  type      = list(string)
+  sensitive = true
+}
+
 variable "sg_ssh_cidr" {
   default   = ["0.0.0.0/0"]
   type      = list(string)
@@ -122,3 +128,6 @@ variable "lb_default_action" {
   sensitive = true
 }
 
+variable "instance_id" {
+
+}
