@@ -12,7 +12,7 @@ sudo apt-get install -y nginx
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
-echo '<h1>Congrats! you have installed apache</h1>' > var/www/html/index.html
+echo -e '<h1>Congrats mickey! you have installed nginx</h1>' > var/www/html/index.html
 
 # Change the SSH port to 273
 new_port=273

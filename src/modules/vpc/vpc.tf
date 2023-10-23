@@ -78,8 +78,6 @@ resource "aws_nat_gateway" "project_nat_gateway" {
 #internet gateway
 resource "aws_internet_gateway" "project_internet_gateway" {
   vpc_id = aws_vpc.project_vpc.id
-
-
   tags = {
     Name        = var.names["internet_gateway"]
     Environment = var.project_environment
@@ -101,7 +99,7 @@ resource "aws_route_table" "project_public_route_table" {
 }
 
 #associate rt with public subnet
-resource "aws_route_table_association" "project_route_table_association" {
+resource "aws_route_table_association" "public_association" {
   subnet_id      = aws_subnet.project_public_subnet.id
   route_table_id = aws_route_table.project_public_route_table.id
 }
@@ -109,10 +107,9 @@ resource "aws_route_table_association" "project_route_table_association" {
 #private route table
 resource "aws_route_table" "project_private_route_table" {
   vpc_id = aws_vpc.project_vpc.id
-
   route {
-    cidr_block = var.cidrs["route_table"]
-    gateway_id = aws_nat_gateway.project_nat_gateway.id
+    cidr_block     = var.cidrs["route_table"]
+    nat_gateway_id = aws_nat_gateway.project_nat_gateway.id
   }
   tags = {
     Name        = var.names["private_route_table"]
@@ -121,7 +118,7 @@ resource "aws_route_table" "project_private_route_table" {
 }
 
 #associate rt with private subnet
-resource "aws_route_table_association" "public_association" {
+resource "aws_route_table_association" "private_association" {
   subnet_id      = aws_subnet.project_private_subnet.id
   route_table_id = aws_route_table.project_private_route_table.id
 }
@@ -166,9 +163,29 @@ resource "aws_lb_target_group" "project_target_group" {
   }
 }
 
+#associate the instance with the target group
+resource "aws_lb_target_group_attachment" "project_tg_attachment" {
+  target_group_arn = aws_lb_target_group.project_target_group.arn
+  target_id        = var.instance_id
+  port             = var.ports["lb_listener"]
+}
+
 #security group for load balancer
 #necessary in order to set the id for the ingress web traffic in the sg
 resource "aws_security_group" "project_lb_sg" {
+  ingress {
+    from_port   = var.ports["lb_listener"]
+    to_port     = var.ports["lb_listener"]
+    protocol    = var.sg_in_protocol[0]
+    cidr_blocks = var.sg_out_cidr
+  }
+
+  egress {
+    from_port   = var.ports["lb_listener"]
+    to_port     = var.ports["lb_listener"]
+    protocol    = var.sg_in_protocol[0]
+    cidr_blocks = var.lb_out_cidr
+  }
   name   = var.names["lb_sg"]
   vpc_id = aws_vpc.project_vpc.id
 
@@ -205,6 +222,7 @@ resource "aws_security_group" "project_instance_sg" {
     to_port     = var.ports["all"]
     protocol    = var.sg_out_protocol
     cidr_blocks = var.sg_out_cidr
+
   }
 
   tags = {
