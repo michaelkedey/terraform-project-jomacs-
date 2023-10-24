@@ -1,4 +1,5 @@
 terraform {
+  #comment the backend config below, to run the code in your local environment
   backend "s3" {
     #bucket exists already
     bucket = "sedem-terra333-bucket"
