@@ -7,6 +7,7 @@ variable "cidrs" {
     private_subnet  = "177.70.0.64/26",
     public_subnet_2 = "177.70.0.128/26",
     route_table     = "0.0.0.0/0",
+    localhost = "127.0.0.1/32"
   }
 
   sensitive   = true
@@ -32,6 +33,11 @@ variable "sg_out_cidr" {
   sensitive = true
 }
 
+variable "localhost" {
+  default = ["127.0.0.1/32"]
+  type = list(string)
+  description = "local host ip for nginx reverse proxy"
+}
 variable "names" {
 
   default = {
