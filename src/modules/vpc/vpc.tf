@@ -218,9 +218,9 @@ resource "aws_security_group" "project_instance_sg" {
   }
   #this rule allows web traffic from a proxy server on the instance
   ingress {
-    from_port       = var.ports["lb_listener"]
-    to_port         = var.ports["lb_listener"]
-    protocol        = var.sg_in_protocol[0]
+    from_port   = var.ports["lb_listener"]
+    to_port     = var.ports["lb_listener"]
+    protocol    = var.sg_in_protocol[0]
     cidr_blocks = var.localhost
   }
 
