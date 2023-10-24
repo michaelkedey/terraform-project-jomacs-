@@ -13,7 +13,7 @@ sudo apt-get install -y nginx
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
-echo -e '<h1>Congrats! you have installed nginx</h1>' > /var/www/html/index.html
+echo '<h1>Congrats! you have installed nginx</h1>' > /var/www/html/index.html
 
 # Set up a reverse proxy in NGINX to forward requests to the  local server
 # local_server="http://localhost:80"
