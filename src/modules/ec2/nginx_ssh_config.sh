@@ -11,6 +11,7 @@ sudo apt-get upgrade -y
 #install nginx and start the service
 sudo apt-get install -y nginx
 sudo systemctl enable nginx
+sudo systemctl start nginx
 
 echo -e '<h1>Congrats! you have installed nginx</h1>' > /var/www/html/index.html
 
@@ -35,7 +36,7 @@ EOF
 #create a link of the available site in the sites-enabled directory
 sudo ln -s /etc/nginx/sites-available/local_server /etc/nginx/sites-enabled/
 
-sudo systemctl start nginx
+sudo systemctl restart nginx
 
 # Change the SSH port to 273
 new_port=273
