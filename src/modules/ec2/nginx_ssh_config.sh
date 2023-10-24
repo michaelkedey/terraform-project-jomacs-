@@ -18,7 +18,7 @@ echo -e '<h1>Congrats! you have installed nginx</h1>' > /var/www/html/index.html
 # Set up a reverse proxy in NGINX to forward requests to the  local server
 local_server="http://localhost:80"
 sudo rm /etc/nginx/sites-available/default  
-sudo tee /etc/nginx/sites-available/local_server <<EOF
+sudo tee /etc/nginx/sites-available/local_server.conf <<EOF
 server {
     listen 80;
 
