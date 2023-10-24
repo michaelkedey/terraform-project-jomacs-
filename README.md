@@ -18,13 +18,13 @@ I have a **src** directory and **README.MD** file in the repo.
 3. I have another directory called **modules** in **src** which contains reusable modules 
 **terraform-project-jomacs-/src/modules**
 
-4. Inside the modules directory,  I have 2 sub-directories which define 2 seperate reusable modules, **vpc** and **ec2**. In these sperate module directories, I deffined the components and resources perculiar to each.
+4. Inside the **modules** directory,  I have 2 sub-directories which define 2 seperate reusable modules, **vpc** and **ec2**. In these sperate module directories, I deffined the components and resources perculiar to each.
 **terraform-project-jomacs-/src/modules/vpc**
 **terraform-project-jomacs-/src/modules/ec2**
 
-5. The **vpc** module conatins all configurations for the vpc resource, the main vpc.tf file, viraibles deffinnition (var.tf), outputs (outputs.tf), providers configuration (providers.tf), and a store.tf file which passes neceasry values to the ssm parameter store.
+5. The **vpc** module conatins all configurations for the vpc resource, **the main vpc.tf file, viraibles deffinnition (var.tf), outputs (outputs.tf), providers configuration (providers.tf), and a store.tf file which passes neceasry values to the ssm parameter store.**
 
-6. The **Ec2** module also contains all configurations for the instance, the main ec2.tf file, viraibles deffinnition (var.tf), outputs (outputs.tf), providers configuration (providers.tf), and a data.tf file where I defined a data resource for my ami.
+6. The **Ec2** module also contains all configurations for the instance, the main **ec2.tf file, viraibles deffinnition (var.tf), outputs (outputs.tf), providers configuration (providers.tf), and a data.tf file where I defined a data resource for my ami.**
 
 7. I have a vpc with 3 subnets; two public subnets in two different avaliabilty zones, and a private subnet which contains my instanace.
 
@@ -41,7 +41,9 @@ I have a **src** directory and **README.MD** file in the repo.
 14. move into the cloned repository, ceate a branch and switch to it
 15. change directory into the src directory, which contains the **main.tf** file
 16. Run terraform init, to initialize the appropriate terraform 
+17. I have also automated the deployment of the infrastracture by including a **.github/workflows directory in my root directory, in which i deffined an action.yml file**
 
+18. **If you clone the repo, and push to github sometime, remeber to take out or modify the actions.yml file**
 
 
 
