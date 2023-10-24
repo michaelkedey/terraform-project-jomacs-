@@ -34,7 +34,7 @@ server {
 EOF
 
 #create a link of the available site in the sites-enabled directory
-sudo ln -s /etc/nginx/sites-available/local_server /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/server.conf /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx
 
