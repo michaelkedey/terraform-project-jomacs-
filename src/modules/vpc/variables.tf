@@ -33,11 +33,6 @@ variable "sg_out_cidr" {
   sensitive = true
 }
 
-variable "localhost" {
-  default     = ["127.0.0.1/32"]
-  type        = list(string)
-  description = "local host ip for nginx reverse proxy"
-}
 variable "names" {
 
   default = {
@@ -61,9 +56,19 @@ variable "names" {
     lb                  = "jp_lb"
   }
 
-  #sensitive   = true
+  sensitive   = true
   type        = map(string)
   description = "tags for vpc resources"
+}
+
+variable "tags_all" {
+  type        = map(string)
+  description = "A map of tags to assign to the resource."
+  sensitive   = true
+  default = {
+    "Environment" = "jomacs_project",
+    "Owner"       = "Michael Kedey"
+  }
 }
 
 variable "azs" {
@@ -82,10 +87,6 @@ variable "eip_domain" {
   type      = string
   sensitive = true
 }
-
-/* variable "instance_id" {
-  
-} */
 
 variable "load_balancer_type" {
   default = "application"

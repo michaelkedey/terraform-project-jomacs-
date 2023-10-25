@@ -28,3 +28,13 @@ variable "key_name" {
   default = "ginakey"
   type    = string
 }
+
+variable "tags_all" {
+  type        = map(string)
+  description = "A map of tags to assign to the resource."
+  sensitive   = true
+  default = {
+    "Environment" = "jomacs_project",
+    "Owner"       = "Michael Kedey"
+  }
+}

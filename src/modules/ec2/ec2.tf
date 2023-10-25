@@ -5,7 +5,14 @@ resource "aws_instance" "project_instance" {
   security_groups = var.security_groups
   user_data       = file("${path.module}/nginx_ssh_config.sh")
   provider        = aws.project_region
-  tags            = { Name = var.names["instance_name"] }
+  tags = sensitive(
+    merge(
+      var.tags_all,
+      {
+        Name = var.names["instance_name"]
+      }
+    )
+  )
   #key exists already in my cloud environment
   #comment the code below to run without key
   key_name = var.key_name
