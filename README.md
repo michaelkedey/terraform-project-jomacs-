@@ -8,8 +8,8 @@
 
 ## This is a cloud project which involves provissioning AWS infrastracture via terraform and automating the deployment via git actions.
 
--  Project structure
-I have a **src** directory and **README.MD** file in the repository.
+#### Project structure
+- I have a **src** directory and **README.MD** file in the repository.
 1. **terraform-project-jomacs-**
 
 -  The **src** directory serves as the root of the project. It contains a **main.tf** file in which I created resources from **modules** already deffined. It also has other configurations as needed.
@@ -41,7 +41,7 @@ I have a **src** directory and **README.MD** file in the repository.
 
 - **If you clone the repo, and push to github sometime, remember to take out or modify the .githiub/workflows content**
 
-- To deploy this infrasrcture;
+#### To deploy this infrasrcture;
 1. **Fork or clone** the repository to your local environment
 2. Move into the cloned repository, **ceate a branch and switch to it**
 3. Change directory into the **src directory**, which contains the **main.tf** file
@@ -50,7 +50,7 @@ I have a **src** directory and **README.MD** file in the repository.
 6. Run **terraform plan**, and **terraform apply** to have the resources created.
 7. Run terraform destroy to destroy all resources after you're done
 
-- **In all your resources will include**
+#### In all your resources will include
 1. **vpc**
 2. **subnet 1**
 3. **subnet 2**
