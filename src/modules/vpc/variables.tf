@@ -6,8 +6,7 @@ variable "cidrs" {
     public_subnet   = "177.70.0.0/26",
     private_subnet  = "177.70.0.64/26",
     public_subnet_2 = "177.70.0.128/26",
-    route_table     = "0.0.0.0/0",
-    localhost       = "127.0.0.1/32"
+    route_table     = "0.0.0.0/0"
   }
 
   sensitive   = true

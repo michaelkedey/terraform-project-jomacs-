@@ -10,17 +10,17 @@ this is a cloud project which involves provissioning AWS resources via terraform
 
 1. Project structure
 I have a **src** directory and **README.MD** file in the repository.
-**terraform-project-jomacs-**
+- **terraform-project-jomacs-**
 
 2. The **src** directory serves as the root of the project. It contains a **main.tf** file in which I created resources from **modules** already deffined. It also has other configurations as needed.
-**terraform-project-jomacs-/src**
+- **terraform-project-jomacs-/src**
 
 3. I have another directory called **modules** in **src** which contains reusable modules 
-**terraform-project-jomacs-/src/modules**
+- **terraform-project-jomacs-/src/modules**
 
 4. Inside the **modules** directory,  I have **2 sub-directories** which define 2 seperate reusable modules, **vpc** and **ec2**. In these sperate module directories, I deffined the components and resources perculiar to each.
-**terraform-project-jomacs-/src/modules/vpc**
-**terraform-project-jomacs-/src/modules/ec2**
+- **terraform-project-jomacs-/src/modules/vpc**
+- **terraform-project-jomacs-/src/modules/ec2**
 
 5. The **vpc** module conatins all configurations for the vpc resource, **the main vpc.tf file, viraibles deffinitions (var.tf), outputs (outputs.tf), providers configuration (providers.tf), and a store.tf file which passes neceasry values to the ssm parameter store.**
 
