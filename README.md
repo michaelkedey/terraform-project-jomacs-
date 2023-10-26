@@ -47,20 +47,30 @@ I have a **src** directory and **README.MD** file in the repository.
 
 - **If you clone the repo, and push to github sometime, remember to take out or modify the .githiub/workflows content**
 - **In all your resources will include**
-1. vpc
-2. 3 subnets
-5. nat gateway
-6. internet gateway
-7. load balancer
-8. load balancer listener
-9.  eip
-10. 2 target groups
-12. 2 route tables
-14. 2 route table associations
-15. 2 routes
-17. target group attachement
-18. 5 ssm parameter resources
-23. ec2 
+1. **vpc**
+2. **subnet 1**
+3. **subnet 2**
+4. **subnet 3**
+5. **nat gateway**
+6. **internet gateway**
+7. **load balancer**
+8. **load balancer listener**
+9. **eip**
+10. **target group 1**
+11. **target group 2**
+12. **route table 1**
+13. **route table 2**
+14. **route table association 1**
+15. **route table association 2**
+15. **route 1**
+16. **route 2**
+17. **target group attachement**
+18. **ssm parameter resource 1**
+19. **ssm parameter resource 2**
+20. **ssm parameter resource 3**
+21. **ssm parameter resource 4**
+22. **ssm parameter resource 5**
+23. **ec2**
 
 
 
