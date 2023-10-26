@@ -56,12 +56,11 @@ I have a **src** directory and **README.MD** file in the repository.
 7. **load balancer**
 8. **load balancer listener**
 9. **eip**
-10. **target group 1**
-11. **target group 2**
-12. **route table 1**
-13. **route table 2**
-14. **route table association 1**
-15. **route table association 2**
+10. **target group**
+11. **security group 1**
+12. **security group 2**
+13. **route table association 1**
+14. **route table association 2**
 15. **route 1**
 16. **route 2**
 17. **target group attachement**
