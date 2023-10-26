@@ -12,18 +12,19 @@ sudo apt-get install -y nginx
 sudo systemctl enable nginx
 
 echo -e '<h1>Congrats! you have installed nginx</h1>
-<h2>You have succesfully configured a proxey server as well</h2>
+<h3>You have succesfully configured a proxey server as well</h3>
 <h3>Your configurations include the following</h3>
 <ol>
-  <li>VPC and subnets</li>
-  <li>Load balancer</li>
+  <li>VPC and 3 subnets, 2 route tables and 2 route table attachements</li>
+  <li>Load balancer and listener</li>
   <li>Target group</li>
-  <li>Security groups</li>
+  <li>2 Security groups</li>
   <li>Internet Gateway</li>
   <li>NAT Gateway</li>
   <li>EC2</li>
   <li>EIP for the NAT Gateway</li>
-  <li>SSM Parameter resources</li>
+  <li>Shell script to run at boot time for the Ec2</li>
+  <li>5 SSM Parameter resources</li>
 </ol>
 <a href="https://www.github.com/michaelkedey">Github</a>
 <a href="https://www.linkedin.com/in/michaelkedey">LinkedIn</a>

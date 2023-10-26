@@ -6,7 +6,7 @@ variable "cidrs" {
     public_subnet   = "177.70.0.0/26",
     private_subnet  = "177.70.0.64/26",
     public_subnet_2 = "177.70.0.128/26",
-    route_table     = "0.0.0.0/0"
+    default_route   = "0.0.0.0/0"
   }
 
   sensitive   = true
@@ -20,13 +20,7 @@ variable "lb_out_cidr" {
   sensitive = true
 }
 
-variable "sg_ssh_cidr" {
-  default   = ["0.0.0.0/0"]
-  type      = list(string)
-  sensitive = true
-}
-
-variable "sg_out_cidr" {
+variable "default_route" {
   default   = ["0.0.0.0/0"]
   type      = list(string)
   sensitive = true
@@ -75,11 +69,6 @@ variable "azs" {
   type      = list(string)
   sensitive = true
 }
-variable "project_environment" {
-  default   = "jomacs_project"
-  type      = string
-  sensitive = true
-}
 
 variable "eip_domain" {
   default   = "vpc"
@@ -94,30 +83,18 @@ variable "load_balancer_type" {
 
 variable "ports" {
   default = {
-    lb_listener = 80,
-    custom_ssh  = 273,
-    all         = 0
+    custom_web = 80,
+    custom_ssh = 273,
+    all        = 0
   }
   sensitive = true
   type      = map(number)
 }
 
-variable "sg_out_protocol" {
-  default   = -1
-  type      = string
-  sensitive = true
-}
-
-variable "tg_protocol" {
-  default   = "HTTP"
-  type      = string
-  sensitive = true
-}
-
-variable "sg_in_protocol" {
-  default     = ["tcp"]
+variable "protocols" {
+  default     = ["HTTP", -1, "tcp"]
   description = "allow only tcp traffic in"
-  type        = list(string)
+  type        = list(any)
   sensitive   = true
 }
 

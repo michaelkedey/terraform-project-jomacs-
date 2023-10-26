@@ -11,8 +11,6 @@ resource "aws_vpc" "project_vpc" {
   )
 }
 
-
-
 #public subnet
 resource "aws_subnet" "project_public_subnet" {
   vpc_id            = aws_vpc.project_vpc.id
@@ -64,11 +62,11 @@ resource "aws_eip" "project_eip" {
   #instance = var.instance_id
 }
 
+#uncomment the code below, if you want to assign an eip to your instance
 /* resource "aws_eip_association" "project_eip_association" {
   instance_id   = var.instance_id
   allocation_id = aws_eip.project_eip
 } */
-
 
 #nat gateway
 resource "aws_nat_gateway" "project_nat_gateway" {
@@ -99,7 +97,7 @@ resource "aws_internet_gateway" "project_internet_gateway" {
 resource "aws_route_table" "project_public_route_table" {
   vpc_id = aws_vpc.project_vpc.id
   route {
-    cidr_block = var.cidrs["route_table"]
+    cidr_block = var.cidrs["default_route"]
     gateway_id = aws_internet_gateway.project_internet_gateway.id
   }
 
@@ -121,7 +119,7 @@ resource "aws_route_table_association" "public_association" {
 resource "aws_route_table" "project_private_route_table" {
   vpc_id = aws_vpc.project_vpc.id
   route {
-    cidr_block     = var.cidrs["route_table"]
+    cidr_block     = var.cidrs["default_route"]
     nat_gateway_id = aws_nat_gateway.project_nat_gateway.id
   }
 
@@ -159,8 +157,8 @@ resource "aws_lb" "project_lb" {
 #load balancer traffic listener
 resource "aws_lb_listener" "project_lb_listener" {
   load_balancer_arn = aws_lb.project_lb.arn
-  port              = var.ports["lb_listener"]
-  protocol          = var.tg_protocol
+  port              = var.ports["custom_web"]
+  protocol          = var.protocols[0]
 
   default_action {
     type             = var.lb_default_action
@@ -172,8 +170,8 @@ resource "aws_lb_listener" "project_lb_listener" {
 #target group for load balancer
 resource "aws_lb_target_group" "project_target_group" {
   name     = var.names["web-tg"]
-  port     = var.ports["lb_listener"]
-  protocol = var.tg_protocol
+  port     = var.ports["custom_web"]
+  protocol = var.protocols[0]
   vpc_id   = aws_vpc.project_vpc.id
 
   tags = merge(
@@ -188,23 +186,23 @@ resource "aws_lb_target_group" "project_target_group" {
 resource "aws_lb_target_group_attachment" "project_tg_attachment" {
   target_group_arn = aws_lb_target_group.project_target_group.arn
   target_id        = var.instance_id
-  port             = var.ports["lb_listener"]
+  port             = var.ports["custom_web"]
 }
 
 #security group for load balancer
 #necessary in order to set the id for the ingress web traffic in the sg
 resource "aws_security_group" "project_lb_sg" {
   ingress {
-    from_port   = var.ports["lb_listener"]
-    to_port     = var.ports["lb_listener"]
-    protocol    = var.sg_in_protocol[0]
-    cidr_blocks = var.sg_out_cidr
+    from_port   = var.ports["custom_web"]
+    to_port     = var.ports["custom_web"]
+    protocol    = var.protocols[2]
+    cidr_blocks = var.default_route
   }
 
   egress {
-    from_port   = var.ports["lb_listener"]
-    to_port     = var.ports["lb_listener"]
-    protocol    = var.sg_in_protocol[0]
+    from_port   = var.ports["custom_web"]
+    to_port     = var.ports["custom_web"]
+    protocol    = var.protocols[2]
     cidr_blocks = var.lb_out_cidr
   }
   name   = var.names["lb_sg"]
@@ -228,22 +226,23 @@ resource "aws_security_group" "project_instance_sg" {
   ingress {
     from_port   = var.ports["custom_ssh"]
     to_port     = var.ports["custom_ssh"]
-    protocol    = var.sg_in_protocol[0]
-    cidr_blocks = var.sg_ssh_cidr
+    protocol    = var.protocols[2]
+    cidr_blocks = var.default_route
   }
   #this rule allows ingress web traffic from the lb only
   ingress {
-    from_port       = var.ports["lb_listener"]
-    to_port         = var.ports["lb_listener"]
-    protocol        = var.sg_in_protocol[0]
+    from_port       = var.ports["custom_web"]
+    to_port         = var.ports["custom_web"]
+    protocol        = var.protocols[2]
     security_groups = [aws_security_group.project_lb_sg.id]
   }
 
+  #this rule allows all traffic out
   egress {
     from_port   = var.ports["all"]
     to_port     = var.ports["all"]
-    protocol    = var.sg_out_protocol
-    cidr_blocks = var.sg_out_cidr
+    protocol    = var.protocols[1]
+    cidr_blocks = var.default_route
 
   }
 
