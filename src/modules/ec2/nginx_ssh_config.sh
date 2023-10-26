@@ -26,8 +26,10 @@ echo -e '<h1>Congrats! you have installed nginx</h1>
   <li>Shell script to run at boot time for the Ec2</li>
   <li>5 SSM Parameter resources</li>
 </ol>
-<a href="https://www.github.com/michaelkedey">Github</a>
-<a href="https://www.linkedin.com/in/michaelkedey">LinkedIn</a>
+<ul>
+  <li><a href="https://www.github.com/michaelkedey">Github</a></li>
+  <li><a href="https://www.linkedin.com/in/michaelkedey">LinkedIn</a></li>
+</ul>
 <h6>Great Job. cc michael_kedey</h6>' > /var/www/html/index.html
 
 

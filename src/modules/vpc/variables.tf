@@ -98,13 +98,6 @@ variable "protocols" {
   sensitive   = true
 }
 
-variable "custom_ssh" {
-  default     = 273
-  description = "allow traffic on this port"
-  type        = number
-  sensitive   = true
-}
-
 variable "lb_default_action" {
   default   = "forward"
   type      = string

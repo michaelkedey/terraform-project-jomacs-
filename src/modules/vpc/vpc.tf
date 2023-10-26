@@ -11,7 +11,7 @@ resource "aws_vpc" "project_vpc" {
   )
 }
 
-#public subnet
+#public subnet 1
 resource "aws_subnet" "project_public_subnet" {
   vpc_id            = aws_vpc.project_vpc.id
   cidr_block        = var.cidrs["public_subnet"]
@@ -109,7 +109,7 @@ resource "aws_route_table" "project_public_route_table" {
   )
 }
 
-#associate rt with public subnet
+#associate public rt with public subnet
 resource "aws_route_table_association" "public_association" {
   subnet_id      = aws_subnet.project_public_subnet.id
   route_table_id = aws_route_table.project_public_route_table.id
@@ -131,7 +131,7 @@ resource "aws_route_table" "project_private_route_table" {
   )
 }
 
-#associate rt with private subnet
+#associate private rt with private subnet
 resource "aws_route_table_association" "private_association" {
   subnet_id      = aws_subnet.project_private_subnet.id
   route_table_id = aws_route_table.project_private_route_table.id
@@ -190,7 +190,7 @@ resource "aws_lb_target_group_attachment" "project_tg_attachment" {
 }
 
 #security group for load balancer
-#necessary in order to set the id for the ingress web traffic in the sg
+#necessary in order to set the id for the ingress web traffic in the instance sg
 resource "aws_security_group" "project_lb_sg" {
   ingress {
     from_port   = var.ports["custom_web"]
