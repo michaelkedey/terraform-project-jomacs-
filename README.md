@@ -6,7 +6,7 @@
 - **Linkedin: https://www.linkedin.com/in/michaelkedey**
 
 
-#### This is a cloud project which involves provissioning AWS infrastracture via terraform and automating the deployment via git actions.
+## This is a cloud project which involves provissioning AWS infrastracture via terraform and automating the deployment via git actions.
 
 -  Project structure
 I have a **src** directory and **README.MD** file in the repository.
