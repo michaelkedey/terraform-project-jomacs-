@@ -9,8 +9,10 @@
 ## This is a cloud project which involves provissioning AWS infrastracture via terraform and automating the deployment via git actions.
 
 #### Project structure
-- I have a **src** directory and **README.MD** file in the repository.
-1. **terraform-project-jomacs-**
+- I have a **src** directory, **README.md** file and, **test_my_code.go** file in the repository.
+1. **terraform-project-jomacs-/README.md**
+2. **terraform-project-jomacs-/test_my_code.go**
+3. **terraform-project-jomacs-/src**
 
 -  The **src** directory serves as the root of the project. It contains a **main.tf** file in which I created resources from **modules** already deffined. It also has other configurations as needed.
 1. **terraform-project-jomacs-/src**
@@ -39,9 +41,12 @@
 
 - I have automated the deployment of the infrastracture by creating a **ci/cd pipeline** where I have a **.github/workflows directory in my root directory, in which i deffined an action.yml file** The resources get created when I push to main.
 
+- I have autimated the testing of my code by  including a **test_my_code.go** in my repository directory.
+
 - **If you clone the repo, and push to github sometime, remember to take out or modify the .githiub/workflows content**
 
 #### To deploy this infrasrcture;
+- **download and isnatll terraform by adding the path to your system environent variables**
 1. **Fork or clone** the repository to your local environment
 2. Move into the cloned repository, **ceate a branch and switch to it**
 3. Change directory into the **src directory**, which contains the **main.tf** file
@@ -49,6 +54,15 @@
 5. Run **terraform init**, to initialize the terraform provider configuration
 6. Run **terraform plan**, and **terraform apply** to have the resources created.
 7. Run terraform destroy to destroy all resources after you're done
+
+#### To test this code;
+1. Cd into the cloned repository
+2. Install **go** and run **go mod init** to initialize go in the respo directory
+2. Run the **test_my_code.go** file in the repo by running **go test** 
+- **UPDATE**
+- the test_my_code.go file is not operational
+ 
+3. This will create the resource, checks for some specifics like the **vpc and subnets, load balancer and instance**, and then destroy them when done
 
 #### In all your resources will include
 1. **vpc**

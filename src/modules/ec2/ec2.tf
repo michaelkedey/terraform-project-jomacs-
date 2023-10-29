@@ -15,6 +15,6 @@ resource "aws_instance" "project_instance" {
   )
   #key exists already in my cloud environment
   #comment the code below to run without key
-  key_name = var.key_name
+  #key_name = var.key_name
 }
 

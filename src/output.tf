@@ -17,3 +17,7 @@ output "vpc" {
 output "load_balancer" {
   value = module.vpc.load_balancer
 }
+
+output "instance_id" {
+  value = module.ec2.instance_id
+}
