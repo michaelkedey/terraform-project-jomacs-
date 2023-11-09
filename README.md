@@ -64,7 +64,7 @@
  
 3. This will create the resource, checks for some specifics like the **vpc and subnets, load balancer and instance**, and then destroy them when done
 
-#### In all, your resources will include
+#### In all, your resources will include:
 1. **vpc**
 2. **subnet 1**
 3. **subnet 2**
