@@ -39,9 +39,9 @@
 - I have different **security groups** for the **ec2** and the **load balancer**
 - I have an **Ec2 instance, with a shell script** which runs at boot time, **installs nginx, sets up reverse proxy, and change the default ssh port**.
 
-- I have automated the deployment of the infrastracture by creating a **ci/cd pipeline** where I have a **.github/workflows directory in my root directory, in which i deffined an action.yml file** The resources get created when I push to main.
+- I have automated the deployment of the infrastracture by creating a **ci/cd pipeline** where I have a **.github/workflows directory in my root directory, in which i deffined an action.yaml file** The resources get created when I push to main.
 
-- I have autimated the testing of my code by  including a **test_my_code.go** in my repository directory.
+- I have automated the testing of my code by  including a **test_my_code.go** in my repository directory.
 
 - **If you clone the repo, and push to github sometime, remember to take out or modify the .githiub/workflows content**
 
@@ -64,7 +64,7 @@
  
 3. This will create the resource, checks for some specifics like the **vpc and subnets, load balancer and instance**, and then destroy them when done
 
-#### In all your resources will include
+#### In all, your resources will include
 1. **vpc**
 2. **subnet 1**
 3. **subnet 2**
