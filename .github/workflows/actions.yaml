@@ -39,3 +39,7 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
+      - name: Terraform Destroy
+        timeout-minutes: 10
+        run: terraform destroy -auto-approve
