@@ -6,16 +6,22 @@
 - **Linkedin: https://www.linkedin.com/in/michaelkedey**
 
 
-## This is a cloud project which involves provissioning AWS infrastracture via terraform and automating the deployment via git actions.
+## This is a cloud project which involves provissioning AWS infrastracture via terraform and automating the deployment and subsequent destruction via git actions.
+
+### Objective
+- **A secure VPC environment with an EC2 instance residing within a private subnet, running an Nginx web server with a proxy server, accessible to the outside world via a load balancer with a public facing  listener. Traffic to the EC2 instance is routed through a NAT gateway.**
 
 #### Project structure
-- I have a **src** directory, **README.md** file and, **test_my_code.go** file in the repository.
+- I have a **src** directory, **.github/workflows** directory, a **README.md** file and, **test_my_code.go** file in the repository.
 1. **terraform-project-jomacs-/README.md**
 2. **terraform-project-jomacs-/test_my_code.go**
 3. **terraform-project-jomacs-/src**
+4. **.github/workflows/actions.yaml**
 
 -  The **src** directory serves as the root of the project. It contains a **main.tf** file in which I created resources from **modules** already deffined. It also has other configurations as needed.
 1. **terraform-project-jomacs-/src**
+
+- The **.github** directory conatins a sub-directory **workflows**, which in turn contains an **actions.yaml** file. The particular placement of this file **(actions.yaml)** is necesarry for the succesful implementation of the **cicd pipelin (create, and destroy after 10 minutes) aka automation**  
 
 -  I have another directory called **modules** in **src** which contains reusable modules defined
 1. **terraform-project-jomacs-/src/modules**
@@ -32,7 +38,7 @@
 
 - I also have a **load balancer and a listener**, associated with the public subnet, which distributes traffic to the security group in which the instance resides.
 
-- I have an **Internet Gateway** in the vpc which has a public route table, with routes defined which send all traffic to the internet. 
+- I have an **Internet Gateway** in the vpc which has a public route table, with routes defined which send traffic to the internet. 
 
 - I also have a **NAT Gateway** residing in the public subnet, which has a route table with a route diffined which only sends outbound traffic from the **private subnet** through the **Internet Gateway**.
 
@@ -46,7 +52,7 @@
 - **If you clone the repo, and push to github sometime, remember to take out or modify the .githiub/workflows content**
 
 #### To deploy this infrasrcture;
-- **download and isnatll terraform by adding the path to your system environent variables**
+- **download and install terraform by adding the path to your system environent variables**
 1. **Fork or clone** the repository to your local environment
 2. Move into the cloned repository, **ceate a branch and switch to it**
 3. Change directory into the **src directory**, which contains the **main.tf** file
