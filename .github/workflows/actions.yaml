@@ -40,6 +40,8 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
+      - name: Sleep for 10 minutes
+        run: sleep 600
+
       - name: Terraform Destroy
-        timeout-minutes: 10
         run: terraform destroy -auto-approve
